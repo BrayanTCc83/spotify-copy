@@ -13,7 +13,8 @@ const Button = ( props ) =>{
         borderColor : textColor,
         borderWidth : 1,
         justifyContent : 'center',
-        alignItems : 'center'
+        alignItems : 'center',
+        margin : 5
       }
     })
 

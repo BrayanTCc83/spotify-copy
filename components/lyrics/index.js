@@ -18,7 +18,8 @@ const lyrics = StyleSheet.create({
       height : 450,
       backgroundColor : 'blue',
       borderRadius : 20,
-      padding : 10
+      padding : 10,
+      margin : 5
     },
     text : {
       fontSize : 28,

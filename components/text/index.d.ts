@@ -8,7 +8,8 @@ const Text = ( props : {
     type ?: textType,
     text ?: string,
     maxSize ?: number,
-    color ?: textColor
+    color ?: textColor,
+    noMargin ?: boolean
 } ) : JSX.Element => {}
 
 export default Text

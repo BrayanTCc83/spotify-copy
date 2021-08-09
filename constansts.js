@@ -6,6 +6,7 @@ const textColorSecondary = '#C5C5C5'
 const backgroundColor = '#1C1C1C'
 const backgroundGray = '#333333'
 const shadowColor = '#000000'
+const green = '#20bd28'
 
 export {
     transparent,
@@ -14,5 +15,6 @@ export {
     textColorSecondary,
     backgroundColor,
     backgroundGray,
-    shadowColor
+    shadowColor,
+    green
 }

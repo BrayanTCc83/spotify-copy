@@ -1,13 +1,19 @@
 import React from 'react'
 import TextView from '../text'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import IconItem from '../icons'
 import { backgroundGray } from '../../constansts'
+import { useNavigation } from '@react-navigation/core'
+import ROUTES from '../../router/routes'
+import { useDesignContext } from '../../providers/design'
 
 const PlayBar = ( props ) => {
+    const navigation = useNavigation()
+    const { width } = useDesignContext()
+
     const playBar = StyleSheet.create({
         container : {
-            width: 410,
+            width: width,
             height : 70,
             backgroundColor : backgroundGray,
             alignItems : 'center',
@@ -27,8 +33,13 @@ const PlayBar = ( props ) => {
             backgroundColor : 'white'
         }
     })
+
+    const goToSongView = () => { 
+        navigation.navigate( ROUTES.PlaySong )
+    }
+
     return(
-        <View style={ playBar.container } >
+        <TouchableOpacity style={ playBar.container } onPress={ goToSongView } >
             <View style={ playBar.image } />
             <View style={ playBar.songInfo } >
                 <TextView type='small' text='Nombre de la canción' />
@@ -36,7 +47,7 @@ const PlayBar = ( props ) => {
             </View>
             <IconItem icon='HEART_VOID' />
             <IconItem icon='PLAY' />
-        </View>
+        </TouchableOpacity>
     )
 }
 export default PlayBar

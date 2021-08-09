@@ -8,6 +8,7 @@ const SearchScreen = ( props ) => {
     return(
         <ScreenContainer>
             <TextView type='h1' text='Buscar' />
+            <InputSearch/>
             <TextView type='h2' text='Tus generos' />
             <CardGenre/>
             <CardGenre/>

@@ -1,10 +1,11 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
-
-const textColor = '#ffffff'
-const textColorSecondary = '#C5C5C5'
+import { useDesignContext } from '../../providers/design'
+import { textColor, textColorSecondary } from '../../constansts'
 
 const TextView = ( props ) => {
+    const { width } = useDesignContext()
+
     const getStyleSheet = () => {
         let styleSheet = texts.content
         switch( props.type ){
@@ -32,17 +33,17 @@ const TextView = ( props ) => {
 
     const textStandart = StyleSheet.create({
         h : {
-            width : props.maxSize ? props.maxSize : 400,
+            width : props.maxSize ? props.maxSize : width - 20,
             color : props.color && props.color === 'gray'? textColorSecondary : textColor ,
             fontWeight : 'bold',
-            marginVertical : 10,
-            paddingHorizontal : 10
+            margin : props.noMargin ? 0 : 10
         },
         text : {
+            minWidth : props.maxSize ? props.maxSize : 0,
             maxHeight : 60,
             color : props.color && props.color === 'gray'? textColorSecondary : textColor ,
             fontWeight : 'bold',
-            margin : 2,
+            margin : props.noMargin ? 0 : 2,
         }
     })
 
@@ -77,7 +78,7 @@ const TextView = ( props ) => {
     })
 
     return (
-        <Text style={ getStyleSheet() }>
+        <Text style={ getStyleSheet() } >
             {
                 props.text ? props.text : ''
             }

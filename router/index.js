@@ -5,6 +5,8 @@ import ROUTES from './routes'
 import HomeScreen from '../screens/Home'
 import LibraryScreen from '../screens/Library'
 import SearchScreen from '../screens/Search'
+import PlaySongScreen from '../screens/PlaySong'
+import ArtistScreen from '../screens/Artist'
 
 const Stack = createStackNavigator()
 
@@ -15,7 +17,7 @@ const AppRouter = () => {
                 screenOptions = {{
                     headerShown : false
                 }}
-                initialRouteName = { ROUTES.HomeScreen }
+                initialRouteName = { ROUTES.Artist }
             >
                 <Stack.Screen
                     name = { ROUTES.HomeScreen }
@@ -35,7 +37,11 @@ const AppRouter = () => {
                 />
                 <Stack.Screen
                     name = { ROUTES.PlaySong }
-                    component = { HomeScreen }
+                    component = { PlaySongScreen }
+                />
+                <Stack.Screen
+                    name = { ROUTES.Artist }
+                    component = { ArtistScreen }
                 />
             </Stack.Navigator>
         </NavigationContainer>

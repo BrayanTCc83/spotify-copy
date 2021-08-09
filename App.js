@@ -1,9 +1,14 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { DesignProvider } from './providers/design';
+import { MusicProvider } from './providers/music';
 import AppRouter from './router';
 
 export default function App() {
   return (
-    <AppRouter/>
+    <DesignProvider>
+      <MusicProvider>
+        <AppRouter/>
+      </MusicProvider>
+    </DesignProvider>
   );
 }
