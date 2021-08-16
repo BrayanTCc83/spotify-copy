@@ -14,7 +14,7 @@ const DesignProvider = ( props ) => {
             height,
             fontScale
         })
-    }, width, height, fontScale )
+    }, [width, height, fontScale] )
 
     return(
         <DesignContext.Provider {...props} value={ value } />

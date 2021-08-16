@@ -9,6 +9,9 @@ const TextView = ( props ) => {
     const getStyleSheet = () => {
         let styleSheet = texts.content
         switch( props.type ){
+            case 'super' :
+                styleSheet = texts.super
+                break
             case 'h1' :
                 styleSheet = texts.h1
                 break
@@ -36,7 +39,8 @@ const TextView = ( props ) => {
             width : props.maxSize ? props.maxSize : width - 20,
             color : props.color && props.color === 'gray'? textColorSecondary : textColor ,
             fontWeight : 'bold',
-            margin : props.noMargin ? 0 : 10
+            margin : props.noMargin ? 0 : 10,
+            ...props.style
         },
         text : {
             minWidth : props.maxSize ? props.maxSize : 0,
@@ -44,10 +48,16 @@ const TextView = ( props ) => {
             color : props.color && props.color === 'gray'? textColorSecondary : textColor ,
             fontWeight : 'bold',
             margin : props.noMargin ? 0 : 2,
+            ...props.style
         }
     })
 
     const texts = StyleSheet.create({
+        super : {
+            fontSize : 50,
+            marginTop : 120,
+            ...textStandart.h
+        },
         h1 : {
             fontSize : 28,
             ...textStandart.h

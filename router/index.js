@@ -7,6 +7,7 @@ import LibraryScreen from '../screens/Library'
 import SearchScreen from '../screens/Search'
 import PlaySongScreen from '../screens/PlaySong'
 import ArtistScreen from '../screens/Artist'
+import AlbumScreen from '../screens/Album'
 
 const Stack = createStackNavigator()
 
@@ -17,7 +18,7 @@ const AppRouter = () => {
                 screenOptions = {{
                     headerShown : false
                 }}
-                initialRouteName = { ROUTES.Artist }
+                initialRouteName = { ROUTES.HomeScreen }
             >
                 <Stack.Screen
                     name = { ROUTES.HomeScreen }
@@ -41,7 +42,11 @@ const AppRouter = () => {
                 />
                 <Stack.Screen
                     name = { ROUTES.Artist }
-                    component = { ArtistScreen }
+                    component = { ArtistScreen } 
+                />
+                <Stack.Screen
+                    name = { ROUTES.Album }
+                    component = { AlbumScreen }
                 />
             </Stack.Navigator>
         </NavigationContainer>

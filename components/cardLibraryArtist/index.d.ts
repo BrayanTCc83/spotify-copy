@@ -6,7 +6,10 @@ enum cardModes {
 
 const CardLibraryArtist = (
     props : {
-        mode : cardModes
+        mode : cardModes,
+        name : string,
+        description : string,
+        image : string
     }
 ) : JSX.Element => {}
 

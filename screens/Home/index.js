@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
 import TextView from '../../components/text'
 import IconItem from '../../components/icons'
@@ -7,8 +7,21 @@ import CardWelcome from '../../components/cardWelcome'
 import CardSquare from '../../components/cardSquare'
 import CardArtist from '../../components/cardArtist'
 import ScreenContainer from '../ScreenContainer'
+import StorageConection from '../../database/storage'
 
 const HomeScreen = ( props ) => {
+    const Storage = StorageConection()
+
+    const loadArtists = () => {
+        Storage.getFolders( ( item ) => {
+            console.log( item.name )
+        } )
+    }
+
+    useEffect(()=>{ 
+        loadArtists()
+    }, [] )
+
     return (
         <ScreenContainer>
             <View style={ HomeScreenComponents.header } >

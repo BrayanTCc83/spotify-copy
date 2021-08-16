@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import TextView from '../text'
 
 const CardLibraryArtist = ( props ) => {
@@ -32,26 +32,34 @@ const CardLibraryArtist = ( props ) => {
 
     const ContainerMode = ( containerData ) => {
         return (
-            <View style={ 
+            <TouchableOpacity onPress={ props.onPress ? ()=> props.onPress( props.route ) : ()=>{} } style={ 
                 props.mode === 0 ?
                     cardLibraryArtist.containerHorizontal : cardLibraryArtist.containerVertical
             }>
-                <View style={ 
-                    props.mode === 0 ? 
-                        cardLibraryArtist.imageHorizontal : cardLibraryArtist.imageVertical
-                }/>
+                {
+                  props.image !== '' ?
+                    <Image source={ { uri : props.image } } style={ 
+                        props.mode === 0 ? 
+                            cardLibraryArtist.imageHorizontal : cardLibraryArtist.imageVertical
+                    } />
+                     :
+                    <View style={ 
+                        props.mode === 0 ? 
+                            cardLibraryArtist.imageHorizontal : cardLibraryArtist.imageVertical
+                    }/>
+                }
                 {
                     containerData.children
                 }
-            </View>
+            </TouchableOpacity>
         )
     }
 
     return(
         <ContainerMode>
             <View>
-                <TextView type='small' text='Artists' />
-                <TextView type='sub' color='gray' text='Description' />
+                <TextView type='small' text={ props.name ? props.name : 'Artists'} />
+                <TextView type='sub' color='gray' text={props.description ? props.description :'Description'} />
             </View>
         </ContainerMode>
     )

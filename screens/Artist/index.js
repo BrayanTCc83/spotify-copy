@@ -1,59 +1,53 @@
-import React, { useState } from 'react'
-import { View, StyleSheet } from 'react-native'
-import IconItem from '../../components/icons'
+import React, { useState, useEffect } from 'react'
+import { StyleSheet } from 'react-native'
 import AlbumItem from '../../components/albumItem'
 import TextView from '../../components/text'
-import { cardFill, backgroundColor, green } from '../../constansts'
 import { useDesignContext } from '../../providers/design'
-import BaseScreen from '../Base'
+import { useNavigation } from '@react-navigation/core'
+import StorageConection from '../../database/storage'
+import ArtistHeader from '../../components/artistHeader'
 
 const ArtistScreen = ( props ) => {
     const { width, height } = useDesignContext()
-    const [ headerHeight, setHeaderHeight ] = useState( height / 3 )
+    const [ albums, setAlbums ] = useState([])
+    const [ image, setImage ] = useState( )
+    const Storage = StorageConection( 'Zoé' )  
 
     const ArtistScreenStyle = StyleSheet.create({
-        header : {
-            width : width,
-            height : headerHeight,
-            backgroundColor : cardFill,
-            zIndex : 1
-        },
-        iconBorder : {
-            position : 'absolute',
-            top : headerHeight - 40,
-            marginLeft : width - 90 ,
-            width : 70,
-            height : 70,
-            borderRadius : 45,
-            backgroundColor : green,
-            zIndex : 2
-        },
-        icon : {
-            color : backgroundColor
+        songs :  {
+            marginTop : 40,
+            justifyContent : 'center',
+            padding : 10,
+            textAlign : 'center'
         }
     })
 
-    const onScroll = ( data ) => {
-        const scrollY = data.nativeEvent.contentOffset.y
-        if( scrollY > 0 )
-            setHeaderHeight( 70 )
-        else
-            setHeaderHeight( height / 3 )
+    const loadAlbums = () => {
+        Storage.getFolders( (item) => {
+            Storage.getFilesOfType( 'jpg', (subitem) => {
+                Storage.getDownloadLink( subitem, ( link ) => {
+                    setAlbums( albums => [ ...albums, { name : item.name, description : 'Zoé', image : link } ] )
+                } )
+            }, item.name )
+        } )
     }
+    
+    Storage.getFiles( item => Storage.getDownloadLink(item, setImage) )
+
+    useEffect( () => {
+        loadAlbums()
+    }, [] )
 
     return(
-        <View>
-            <View style={ ArtistScreenStyle.iconBorder } >
-                <IconItem icon='PLAY' iconStyle={ ArtistScreenStyle.icon } />
-            </View>
-            <View style={ ArtistScreenStyle.header } >
-                <IconItem icon='BACK' />
-                <TextView text='Artist' type='h1' />
-            </View>
-            <BaseScreen height={ height - headerHeight } onScroll={ onScroll } >
-                <AlbumItem/>
-            </BaseScreen>
-        </View>
+        <ArtistHeader image={ image } name = 'Zoé' >
+            <TextView type='sub' text='Aquí estará la lista con las diferentes canciones de los artistas' color='gray' style={ ArtistScreenStyle.songs } />
+            <TextView maxSize={ width - 20 } type='h2' text='Albums' />
+            {
+                albums.map( ( album ) =>
+                    <AlbumItem {...album} />
+                )
+            }
+        </ArtistHeader>
     )
 }
 

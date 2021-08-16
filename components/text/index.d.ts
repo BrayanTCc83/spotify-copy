@@ -1,6 +1,6 @@
 import Text from './index'
 
-type textType = 'h1' | 'h2' | 'h3' | 'small' | 'sub' | 'content'
+type textType = 'super' | 'h1' | 'h2' | 'h3' | 'small' | 'sub' | 'content'
 
 type textColor = 'white' | 'gray'
 
@@ -9,7 +9,8 @@ const Text = ( props : {
     text ?: string,
     maxSize ?: number,
     color ?: textColor,
-    noMargin ?: boolean
+    noMargin ?: boolean,
+    style?: {}
 } ) : JSX.Element => {}
 
 export default Text

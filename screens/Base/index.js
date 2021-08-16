@@ -2,6 +2,7 @@ import React from 'react'
 import { View, ScrollView, StyleSheet } from 'react-native'
 import { backgroundColor } from '../../constansts'
 import { useDesignContext } from '../../providers/design'
+import * as Animable from 'react-native-animatable'
 
 const BaseScreen = ( props ) =>{
     const { height } = useDesignContext()
@@ -19,8 +20,17 @@ const BaseScreen = ( props ) =>{
         }
     });
 
+    const SelectScreenType = ( subProps ) => {
+        return(
+            props.animatable ? 
+                <Animable.View transition='height' style={subProps.style} >{subProps.children}</Animable.View>
+                :
+                <View style={subProps.style} >{subProps.children}</View>
+        )
+    }
+
     return(
-        <View style={styles.container}>
+        <SelectScreenType style={styles.container}>
             <ScrollView onScrollEndDrag={ props.onScroll ? props.onScroll : ()=>{} } >
                 <View style = { styles.subContainer } >
                 {
@@ -28,7 +38,7 @@ const BaseScreen = ( props ) =>{
                 }
                 </View>
             </ScrollView>
-        </View>
+        </SelectScreenType>
     )
 }
 

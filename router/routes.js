@@ -4,6 +4,7 @@ const Library = 'library'
 const FavoriteSearch = 'favoriteSearch'
 const PlaySong = 'playSong'
 const Artist = 'artist'
+const Album = 'album'
 
 const ROUTES = {
     HomeScreen,
@@ -11,7 +12,8 @@ const ROUTES = {
     Library,
     FavoriteSearch,
     PlaySong,
-    Artist
+    Artist,
+    Album
 }
 
 export default ROUTES
